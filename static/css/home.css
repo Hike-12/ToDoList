@@ -1,4 +1,11 @@
-.main{
-    margin:10px;
+.container{
+    margin:20px;
     padding:10px;
+}
+#taskinput{
+    width:auto;
+}
+#description{
+    height:150px;
+    width:1300px;
 }
