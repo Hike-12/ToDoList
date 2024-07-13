@@ -17,16 +17,17 @@
         </li>
       </ul>
     <div type="container" class="container">
-        <form>
+        <form method="POST" action="">
+          {% csrf_token %}
             <div class="mb-3">
               <label for="Title" class="form-label">Task</label>
-              <input type="text" class="form-control" id="taskinput">
+              <input type="text" class="form-control" id="taskinput" name="title">
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Task Description</label>
-              <input type="text" class="form-control" id="description">
+              <input type="text" class="form-control" id="description" name="desc">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Add to Tasks</button>
           </form>
     </div>
         
