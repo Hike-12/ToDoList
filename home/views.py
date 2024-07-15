@@ -5,10 +5,11 @@ from home.models import Task
 def home(request):
     try:
         if request.method=="POST":
-            title = request.POST.get('title', '') 
-            desc = request.POST.get('desc', '') 
+            title = request.POST['title'] 
+            desc = request.POST['desc']
+            date=request.POST['date'] 
             print(title,desc)
-            new_task = Task(title=title,desc=desc)
+            new_task = Task(title=title,desc=desc,date=date)
             new_task.save()
     except:
         working=True

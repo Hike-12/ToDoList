@@ -1,0 +1,23 @@
+*{
+    filter: invert(100%);
+    font-family: 'Verdana';
+    /* background-color: black; */
+}
+.container{
+    margin:20px;
+    padding:10px;
+    /* background-color: black; */
+}
+#taskinput{
+    width:auto;
+}
+#description{
+    height:150px;
+    width:1300px;
+}
+.form-label{
+    color: aliceblue;
+}
+.nav-link.active{
+    background-color: #fff;
+}
