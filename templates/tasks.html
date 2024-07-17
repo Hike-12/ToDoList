@@ -23,9 +23,13 @@
     <p class="statusTrue" ><b>Complete</b></p>
     <div class="container">
         <input type="checkbox" class="checking" onchange="updateStatus(this)">
-        <p class="title"><u>Title:</u> {{ task.title }}</p>
-        <p class="desc"><u>Description:</u> {{ task.desc }}</p>
-        <p class="date">Deadline: {{task.date}}</p>
+        <p class="title">Title: {{ task.title }}</p>
+        <p class="desc">Description: {{ task.desc }}</p>
+        <p class="deadline">Deadline: {{task.deadline}} <br> ({{task.days_left}} days left)</p>
+        <form id="deleteForm_{{ task.id }}" method="POST" action="{% url 'delete_task' task.id %}">
+          {% csrf_token %}
+          <button onclick="confirmDelete('{{ task.id }}')" type="button" class="btn btn-danger">Delete</button>
+        </form>
     
     </div>
 </div>
@@ -49,6 +53,14 @@
           container.style.boxShadow = '0 0 10px red';
       }
   }
+  function confirmDelete(taskId) {
+    var form = document.getElementById('deleteForm_' + taskId);
+    if (form && confirm('Are you sure you want to delete this task?')) {
+        form.submit();
+    } else {
+        return false;
+    }
+}
 </script>
 
     

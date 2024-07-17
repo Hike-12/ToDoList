@@ -5,7 +5,8 @@ from datetime import date
 class Task(models.Model):
     title=models.CharField(max_length=50)
     desc=models.TextField()
-    date=models.DateField(default=date.today)
+    deadline=models.DateField(default=date.today)
+    days_left=models.IntegerField(default=0)
     
     def __str__(self):
         return self.title

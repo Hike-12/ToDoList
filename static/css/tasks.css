@@ -5,7 +5,7 @@
     font-family: 'Verdana';
 }
 .container{
-    /* margin:0px 25px 25px 25px; */
+    margin:0px 25px 25px 25px;
     padding:25px;
     background-color: #000000;
     border: rgb(255, 0, 0);
@@ -24,6 +24,7 @@
 }
 
 .title{
+    filter:invert(0%);
     grid-area: title;
     font-size: 25px;
     color: aliceblue;
@@ -31,13 +32,14 @@
 
 
 .desc{
+    filter:invert(0%);
     grid-area: desc;
     color: aliceblue;
     display: block;
     font-size: 15px;
 }
 
-.date{
+.deadline{
     border:2px solid white;
     border-radius: 10px;
     padding: 10px;
