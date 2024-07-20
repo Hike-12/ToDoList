@@ -14,21 +14,12 @@ def home(request):
             days_left= abs((date.today()-deadline_date).days)
             new_task = Task(title=title,desc=desc,deadline=deadline,days_left=days_left)
             new_task.save()
-            print(new_task.id)
     except:
         working=True
     return render(request,'home.html')
 
 def tasks(request):
     tasks = Task.objects.all()
-    # try:
-    #     if request.method == "POST":
-    #         task_id = request.POST.get('task_id')
-    #         task = get_object_or_404(Task, id=task_id)
-    #         task.delete()
-    #         return redirect('tasks')  
-    # except:
-    #     working=True
     return render(request, 'tasks.html', {'tasks': tasks})
 
 @require_POST
@@ -36,4 +27,5 @@ def delete_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     task.delete()
     return redirect('tasks')
+    
     

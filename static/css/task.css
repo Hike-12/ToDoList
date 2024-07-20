@@ -1,12 +1,13 @@
-*{
-    filter:invert(100%);
+* {
+    filter: invert(100%);
     /* background-color: #000000; */
     /* font-family: 'Consolas'; */
     font-family: 'Verdana';
 }
-.container{
-    margin:0px 25px 25px 25px;
-    padding:25px;
+
+.container {
+    margin: 0px 25px 25px 25px;
+    padding: 25px;
     background-color: #000000;
     border: rgb(255, 0, 0);
     border-style: solid;
@@ -14,33 +15,33 @@
     border-width: 5px;
     box-shadow: 0 0 10px rgb(255, 0, 0);
     box-sizing: border-box;
-    height:fit-content;
-    display:grid;
-    grid-gap:10px;
-    grid-template-areas: 
-    'checkbox date' 
-    'title date'
-    'desc date';
+    height: fit-content;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas:
+        'checkbox date'
+        'title date'
+        'desc date';
 }
 
-.title{
-    filter:invert(0%);
+.title {
+    filter: invert(0%);
     grid-area: title;
     font-size: 25px;
     color: aliceblue;
 }
 
 
-.desc{
-    filter:invert(0%);
+.desc {
+    filter: invert(0%);
     grid-area: desc;
     color: aliceblue;
     display: block;
     font-size: 15px;
 }
 
-.deadline{
-    border:2px solid white;
+.deadline {
+    border: 2px solid white;
     border-radius: 10px;
     padding: 10px;
     grid-area: date;
@@ -49,37 +50,41 @@
     font-size: 20px;
     text-align: end;
     position: relative;
-    bottom:5px;
-    width:fit-content;
+    bottom: 5px;
+    width: fit-content;
     height: fit-content;
     align-self: center;
     justify-self: center;
     color: aliceblue;
-    background-color:#000000;
+    background-color: #000000;
 }
-.checking{
+
+.checking {
     justify-self: start;
     grid-area: checkbox;
     color: #000000;
 }
-.statusFalse{
-    filter:invert(0%);
+
+.statusFalse {
+    filter: invert(0%);
     text-align: center;
-    color:red;
+    color: red;
     font-size: large;
     margin: 0;
     font-style: bold;
 }
-.statusTrue{
-    filter:invert(0%);
-    display:none;
+
+.statusTrue {
+    filter: invert(0%);
+    display: none;
     text-align: center;
-    color:rgb(0, 255, 55);
+    color: rgb(0, 255, 55);
     font-size: large;
     margin: 0;
     font-style: bold;
 }
-.nav-link.active{
+
+.nav-link.active {
     background-color: #fff;
 }
 
