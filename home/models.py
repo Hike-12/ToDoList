@@ -7,6 +7,7 @@ class Task(models.Model):
     desc=models.TextField()
     deadline=models.DateField(default=date.today)
     days_left=models.IntegerField(default=0)
+    completed_status=models.BooleanField(default=False)
     
     def __str__(self):
         return self.title

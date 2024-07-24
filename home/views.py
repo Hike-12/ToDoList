@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 from home.models import Task
 from datetime import date,datetime
 from django.views.decorators.http import require_POST
+from .forms import TaskForm
 
 # Create your views here.
 def home(request):
@@ -27,5 +28,19 @@ def delete_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     task.delete()
     return redirect('tasks')
+
+def edit_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('tasks')
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'edit_task.html', {'form': form, 'task': task})
+
+
     
     
