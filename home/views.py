@@ -47,7 +47,7 @@ def status_change(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     
     completed_status = request.POST.get('completed_status')
-    completed_status = completed_status.lower() == 'true'  # Convert to boolean
+    completed_status = completed_status.lower() == 'true'
     
     task.completed_status = completed_status
     task.save()

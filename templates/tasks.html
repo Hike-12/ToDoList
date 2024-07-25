@@ -41,18 +41,16 @@
 <script>
     function updateStatus(checkbox,taskID) {
         var task_Id=taskID;
-        var isChecked = checkbox.checked; // Check if the checkbox is checked
-        // Prepare data to send to server
+        var isChecked = checkbox.checked;
         var data = {
             task_id: task_Id,
-            completed_status: isChecked, // Assuming 'completed' is the field you want to update in your database
+            completed_status: isChecked,
         };
         var url = $('#status_form').attr('data-url');
     
-        // Send AJAX request
         $.ajax({
             type: 'POST',
-            url: url,  // Replace with your server endpoint to handle the update
+            url: url,
             data: data,
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("X-CSRFToken", $('input[name=csrfmiddlewaretoken]').val());
@@ -60,46 +58,26 @@
             success: function(response) {
                 console.log('Status updated successfully:', response);
                 var statusTrue = checkbox.parentElement.parentElement.parentElement.querySelector('.statusTrue');
-            var statusFalse = checkbox.parentElement.parentElement.parentElement.querySelector('.statusFalse');
-            var container = checkbox.parentElement.parentElement.parentElement.querySelector('.container');
+                var statusFalse = checkbox.parentElement.parentElement.parentElement.querySelector('.statusFalse');
+                var container = checkbox.parentElement.parentElement.parentElement.querySelector('.container');
 
-            if (isChecked) {
-                statusFalse.style.display = 'none';
-                statusTrue.style.display = 'block';
-                container.style.border = '5px solid green';
-                container.style.boxShadow = '0 0 10px green';
-            } else {
-                statusFalse.style.display = 'block';
-                statusTrue.style.display = 'none';
-                container.style.border = '5px solid red';
-                container.style.boxShadow = '0 0 10px red';
-            }
-            },
+                if (isChecked) {
+                 statusFalse.style.display = 'none';
+                    statusTrue.style.display = 'block';
+                    container.style.border = '5px solid green';
+                    container.style.boxShadow = '0 0 10px green';
+                } else {
+                    statusFalse.style.display = 'block';
+                    statusTrue.style.display = 'none';
+                    container.style.border = '5px solid red';
+                    container.style.boxShadow = '0 0 10px red';
+                }
+                },
             error: function(xhr, status, error) {
                 console.error('Error updating status:', status, error);
-                // Handle errors gracefully
             }
         });
     }
-    
-
-  {% comment %} function updateStatus(checkbox) {
-      var statusTrue = checkbox.parentElement.parentElement.querySelector('.statusTrue');
-      var statusFalse = checkbox.parentElement.parentElement.querySelector('.statusFalse');
-      var container = checkbox.parentElement.parentElement.querySelector('.container');
-
-      if (checkbox.checked) {
-          statusFalse.style.display = 'none';
-          statusTrue.style.display = 'block';
-          container.style.border = '5px solid green';
-          container.style.boxShadow = '0 0 10px green';
-      } else {
-          statusFalse.style.display = 'block';
-          statusTrue.style.display = 'none';
-          container.style.border = '5px solid red';
-          container.style.boxShadow = '0 0 10px red';
-      }
-  } {% endcomment %}
 
   function confirmDelete(taskId) {
     var form = document.getElementById('deleteForm_' + taskId);
