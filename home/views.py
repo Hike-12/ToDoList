@@ -41,6 +41,18 @@ def edit_task(request, task_id):
         form = TaskForm(instance=task)
     return render(request, 'edit_task.html', {'form': form, 'task': task})
 
+@require_POST
+def status_change(request, task_id):
+    task_id = request.POST.get('task_id')
+    task = get_object_or_404(Task, id=task_id)
+    
+    completed_status = request.POST.get('completed_status')
+    completed_status = completed_status.lower() == 'true'  # Convert to boolean
+    
+    task.completed_status = completed_status
+    task.save()
+    
+    return redirect('tasks')
 
     
     

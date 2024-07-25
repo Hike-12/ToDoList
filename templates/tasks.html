@@ -22,20 +22,68 @@
     <p class="statusFalse"><b>Incomplete</b></p>
     <p class="statusTrue" ><b>Complete</b></p>
     <div class="container">
-        <input type="checkbox" class="checking" onchange="updateStatus(this)" name="checkbox">
+        <form method="POST" id="status_form" data-url="{% url 'status_change' task_id=task.id %}">
+            {% csrf_token %}
+            <input type="checkbox" id='status' name='status' class="checking" onchange="updateStatus(this, {{ task.id }})" {% if task.completed_status %}checked{% endif %}>
+        </form>
         <p class="title">Title: {{ task.title }}</p>
         <p class="desc">Description: {{ task.desc }}</p>
         <p class="deadline">Deadline: {{task.deadline}} <br> ({{task.days_left}} days left)</p>
         <form id="deleteForm_{{ task.id }}" method="POST" action="{% url 'delete_task' task.id %}">
           {% csrf_token %}
-          <button onclick="confirmDelete('{{ task.id }}')" type="button" class="btn btn-danger">Delete</button>
+          <button onclick="confirmDelete({{ task.id }})" type="button" class="btn btn-danger">Delete</button>
         </form>
         <a href="{% url 'edit_task' task.id %}" class="button">Edit</a>
     </div>
 </div>
 {% endfor %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-  function updateStatus(checkbox) {
+    function updateStatus(checkbox,taskID) {
+        var task_Id=taskID;
+        var isChecked = checkbox.checked; // Check if the checkbox is checked
+        // Prepare data to send to server
+        var data = {
+            task_id: task_Id,
+            completed_status: isChecked, // Assuming 'completed' is the field you want to update in your database
+        };
+        var url = $('#status_form').attr('data-url');
+    
+        // Send AJAX request
+        $.ajax({
+            type: 'POST',
+            url: url,  // Replace with your server endpoint to handle the update
+            data: data,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-CSRFToken", $('input[name=csrfmiddlewaretoken]').val());
+            },
+            success: function(response) {
+                console.log('Status updated successfully:', response);
+                var statusTrue = checkbox.parentElement.parentElement.parentElement.querySelector('.statusTrue');
+            var statusFalse = checkbox.parentElement.parentElement.parentElement.querySelector('.statusFalse');
+            var container = checkbox.parentElement.parentElement.parentElement.querySelector('.container');
+
+            if (isChecked) {
+                statusFalse.style.display = 'none';
+                statusTrue.style.display = 'block';
+                container.style.border = '5px solid green';
+                container.style.boxShadow = '0 0 10px green';
+            } else {
+                statusFalse.style.display = 'block';
+                statusTrue.style.display = 'none';
+                container.style.border = '5px solid red';
+                container.style.boxShadow = '0 0 10px red';
+            }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error updating status:', status, error);
+                // Handle errors gracefully
+            }
+        });
+    }
+    
+
+  {% comment %} function updateStatus(checkbox) {
       var statusTrue = checkbox.parentElement.parentElement.querySelector('.statusTrue');
       var statusFalse = checkbox.parentElement.parentElement.querySelector('.statusFalse');
       var container = checkbox.parentElement.parentElement.querySelector('.container');
@@ -51,7 +99,8 @@
           container.style.border = '5px solid red';
           container.style.boxShadow = '0 0 10px red';
       }
-  }
+  } {% endcomment %}
+
   function confirmDelete(taskId) {
     var form = document.getElementById('deleteForm_' + taskId);
     if (form && confirm('Are you sure you want to delete this task?')) {
