@@ -4,4 +4,7 @@ from .models import Task
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['title', 'desc', 'deadline', 'completed_status']
+        fields = ['title', 'desc', 'deadline']
+        widgets = {
+            'deadline': forms.DateInput(attrs={'type': 'date'})
+        }

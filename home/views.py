@@ -19,9 +19,24 @@ def home(request):
         working=True
     return render(request,'home.html')
 
+# def tasks(request):
+#     tasks = Task.objects.all()
+#     return render(request, 'tasks.html', {'tasks': tasks})
+
 def tasks(request):
-    tasks = Task.objects.all()
-    return render(request, 'tasks.html', {'tasks': tasks})
+    # Get the filter status from query parameters; default to 'all'
+    status = request.GET.get('status', 'all')
+
+    # Filter tasks based on the selected status
+    if status == 'completed':
+        tasks = Task.objects.filter(completed_status=True)
+    elif status == 'incomplete':
+        tasks = Task.objects.filter(completed_status=False)
+    else:
+        tasks = Task.objects.all()  # 'all' or any other value
+
+    # Render the template with the filtered tasks and current status
+    return render(request, 'tasks.html', {'tasks': tasks, 'current_status': status})
 
 @require_POST
 def delete_task(request, task_id):

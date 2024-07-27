@@ -1,0 +1,52 @@
+/* General styling for the form container */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the form headings */
+h2 {
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+/* Style for the form elements (input, textarea, etc.) */
+form input, form textarea, form select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Style for the submit button */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Remove default styles for buttons with href attribute */
+button[href] {
+    display: inline-block;
+    text-decoration: none;
+}
