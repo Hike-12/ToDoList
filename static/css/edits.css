@@ -1,3 +1,8 @@
+*{
+    filter:invert(100%);
+    font-family: 'Verdana';
+}
+
 /* General styling for the form container */
 form {
     max-width: 600px;
@@ -11,8 +16,8 @@ form {
 
 /* Style for the form headings */
 h2 {
-    color: #333;
-    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+    /* font-family: 'Arial', sans-serif; */
     text-align: center;
 }
 

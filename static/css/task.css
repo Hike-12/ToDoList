@@ -114,9 +114,13 @@
 }
 
 .select {
+    display:inline-block;
+    margin:10px;
     width: fit-content;
     cursor: pointer;
     position: relative;
+    top: 10px;
+    left: 20px;
     transition: 300ms;
     color: white;
     overflow: hidden;
@@ -207,5 +211,6 @@
   .select:has(.options input[type="radio"]#option-2:checked) .selected::before {
     content: attr(data-two);
   }
-
-  
+  .select:has(.options input[type="radio"]#option-3:checked) .selected::before {
+    content: attr(data-three);
+  }
